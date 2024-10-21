@@ -29,6 +29,23 @@ void updateTimeDisplay() {
   lcd.print(s < 10 ? "0" : ""); lcd.print(s);
 }
 
+void handleButtonPress() {
+  if (digitalRead(buttonClockIn) == LOW) {
+    EEPROM.write(0, h);
+    EEPROM.write(1, m);
+    lcd.clear();
+    lcd.print("Entrada registrada!");
+    delay(2000);
+  }
+  if (digitalRead(buttonClockOut) == LOW) {
+    EEPROM.write(2, h);
+    EEPROM.write(3, m);
+    lcd.clear();
+    lcd.print("Saída registrada!");
+    delay(2000);
+  }
+}
+
 void updateClockTime() {
   s++;
   if (s >= 60) {
@@ -45,5 +62,6 @@ void updateClockTime() {
 void loop() {
   updateClockTime();
   updateTimeDisplay();
+  handleButtonPress();
   delay(1000);
 }
