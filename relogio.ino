@@ -12,6 +12,15 @@ void setup() {
   lcd.print("Hora: ");
   lcd.print(h);
 }
+void updateTimeDisplay() {
+  lcd.setCursor(0, 0);
+  lcd.print("Hora: ");
+  lcd.print(h < 10 ? "0" : ""); lcd.print(h);
+  lcd.print(":");
+  lcd.print(m < 10 ? "0" : ""); lcd.print(m);
+  lcd.print(":");
+  lcd.print(s < 10 ? "0" : ""); lcd.print(s);
+}
 
 void updateClockTime() {
   s++;
@@ -28,5 +37,6 @@ void updateClockTime() {
 
 void loop() {
   updateClockTime();
+  updateTimeDisplay();
   delay(1000);
 }
